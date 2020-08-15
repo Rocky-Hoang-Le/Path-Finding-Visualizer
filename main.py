@@ -21,7 +21,7 @@ WINDOW = pygame.display.set_mode((SCREEN_SIZE, SCREEN_SIZE))
 pygame.display.set_caption('Path finding algorithms')  # Set tile to window
 
 # Create menu that will be drawn on top of the same window that will allow user to change settings before
-menu = pygame_menu.Menu(640, 640, 'Path Finder options', theme=pygame_menu.themes.THEME_SOLARIZED)
+menu = pygame_menu.Menu(SCREEN_SIZE, SCREEN_SIZE, 'Path Finder options', theme=pygame_menu.themes.THEME_SOLARIZED)
 
 
 # The node class contains position, size, node type/color, position of other nodes relative to it,
@@ -263,12 +263,16 @@ def change_heuristic(*args):
 
 # Add menu options, text, etc
 # Instructions and options string weirdly spaced to look better on the menu layout
-instructions = 'Press the corresponding number on the keyboard to run the specific algorithm'
-options = '1: A*     2: Greedy Best Search     3: Dijkstra                  ' \
-          '            ' \
-          '            4: Breadth First Search     5: Depth First Search' \
+instructions = 'Place nodes by clicking on the cells. ' \
+               'Automatically start by placing start node and then end node before wall nodes. ' \
+               'Clear nodes with right click, if start or end nodes are cleared it will force user to place start/end node again before starting.'
+instructions_2 = 'After program starts press the corresponding number on the keyboard to run the specific algorithm'
+options = '1: A*     2: Greedy Best Search     3: Dijkstra' \
+          '         4: Breadth First Search     5: Depth First Search' \
           '         P: Menu'
 menu.add_label(instructions, max_char= -1, font_size = 20)
+menu.add_label(' ')
+menu.add_label(instructions_2, max_char= -1, font_size = 20)
 menu.add_label(' ')
 menu.add_label(options, max_char= -1, font_size = 20)
 menu.add_label(' ')
