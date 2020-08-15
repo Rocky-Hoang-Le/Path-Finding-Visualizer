@@ -163,8 +163,10 @@ def dijkstra_path(draw, grid, start, end):
 
 
 # This function finds the shortest path using Breadth First search (Blind Search)
-def breadth_first_path(draw, start, end):
+def breadth_first_path(draw, grid, start, end):
     # Setup node information
+    node_distances = {node: float('inf') for row in grid for node in row}  # Set all node distances as infinity
+    node_distances[start] = 0  # Set starting node distance as 0
     unexplored_nodes = [start]  # Regular queue that will index whether or not the node has been visited
     node_map = {}  # A mapping to know which which node parent goes to which node neighbor
     while unexplored_nodes:
@@ -182,7 +184,8 @@ def breadth_first_path(draw, start, end):
 
         # Check every relative node to see where the next path should be
         for relative_node in current_node.relative_nodes:
-            if not relative_node.is_visited() and not relative_node.is_start():  # Check to see if the node is visited and if its the start node if not add it to queue
+            if 0 < node_distances[relative_node]:  # Check to see if the node is visited and if its the start node if not add it to queue
+                node_distances[relative_node] = 0
                 unexplored_nodes.append(relative_node)
                 node_map[relative_node] = current_node  # Set the parent node of this relative node
                 relative_node.set_free()  # Set node as a free node for re-exploration if needed
@@ -215,7 +218,7 @@ def depth_first_path(draw, start, end):
 
         # Check every relative node to see where the next path should be
         for relative_node in current_node.relative_nodes:
-            if not relative_node.is_visited() and not relative_node.is_start():  # Check to see if the node is visited and if its the start node if not add it to queue
+            if not relative_node.is_visited() and not relative_node.is_start():  # Check to see if the node is visited and if its the start node if not add it to stack
                 unexplored_nodes.append(relative_node)
                 node_map[relative_node] = current_node  # Change the parent node of this relative node
                 relative_node.set_free()  # Set node as a free node which can be re-explored if needed

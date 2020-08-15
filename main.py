@@ -218,7 +218,7 @@ def main(window, screen_size):
             for row in grid:
                 for node in row:
                     node.update_relative_nodes(grid)
-            breadth_first_path(lambda: draw(window, grid, GRID_SIZE, screen_size), start, end)
+            breadth_first_path(lambda: draw(window, grid, GRID_SIZE, screen_size), grid, start, end)
 
         # Pressing 5 will start Depth First Search path finding
         if keys[pygame.K_5] and start and end:
