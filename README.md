@@ -27,6 +27,8 @@ After the program starts there are 5 algorithms to choose from and pressing the 
 
 5: Depth First Search
 
+Pressing P will bring up the menu again
+
 # Node types
 
 White - Neutral
